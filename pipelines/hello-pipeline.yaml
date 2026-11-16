@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: hello-pipeline
+spec:
+  params:
+    - name: greeting
+      type: string
+      description: The greeting to print
+      default: "Hello"
+  tasks:
+    - name: hello
+      taskRef:
+        name: hello-world
+      params:
+        - name: greeting
+          value: $(params.greeting)
